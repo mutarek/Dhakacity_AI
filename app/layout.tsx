@@ -183,6 +183,7 @@ export default function RootLayout({
                 <p>Sharper local search, better city navigation.</p>
               </div>
             </div>
+          </div>
         </footer>
       </body>
     </html>
