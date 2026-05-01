@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlaceCategory {
+  restaurant
+  hospital
+  diagnostic
+}
+
+model Place {
+  id         Int           @id @default(autoincrement())
+  name       String
+  category   PlaceCategory
+  address    String
+  lat        Float
+  lng        Float
+  phone      String?
+  openHours  String
+  priceRange String
+  featured   Boolean       @default(false)
+  imageUrls  String[]      @default([])
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  placeTags  PlaceTag[]
+  embedding  Embedding?
+
+  @@index([category])
+  @@map("places")
+}
+
+model Tag {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  placeTags PlaceTag[]
+
+  @@map("tags")
+}
+
+model PlaceTag {
+  placeId Int
+  tagId   Int
+
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  tag     Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([placeId, tagId])
+  @@index([tagId])
+  @@map("place_tags")
+}
+
+model Embedding {
+  id        Int                         @id @default(autoincrement())
+  placeId   Int                         @unique
+  content   String
+  embedding Unsupported("vector(1536)")
+  createdAt DateTime                    @default(now())
+  updatedAt DateTime                    @updatedAt
+
+  place Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@map("embeddings")
+}
