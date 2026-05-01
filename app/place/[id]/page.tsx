@@ -37,7 +37,7 @@ export default async function PlacePage({ params }: PlacePageProps) {
   const placeDto = toPlaceDto(place);
 
   return (
-    <div className="container py-8">
+    <div className="w-full px-4 py-8 md:px-8">
       <div className="space-y-6 max-w-4xl mx-auto">
         {/* Back Button */}
         <Link href="/search">

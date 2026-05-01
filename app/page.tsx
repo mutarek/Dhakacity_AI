@@ -48,8 +48,8 @@ export default function Home() {
   };
 
   return (
-    <div className="container py-8 md:py-12">
-      <div className="flex flex-col items-center gap-8 md:gap-10">
+    <div className="w-full px-4 py-8 md:px-8 md:py-12">
+      <div className="mx-auto max-w-7xl flex flex-col items-center gap-8 md:gap-10">
         {/* Hero Section */}
         <div className="w-full max-w-5xl rounded-3xl border border-white/60 bg-white/70 p-6 shadow-[0_20px_70px_-35px_rgba(15,23,42,0.45)] backdrop-blur-sm md:p-10">
           <div className="flex flex-col gap-6 text-center md:gap-8">

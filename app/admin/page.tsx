@@ -6,7 +6,7 @@ export default async function AdminPage() {
   const [totalPlaces, featuredPlaces, categoryCount] = await getStats();
 
   return (
-    <div className="container py-8 md:py-10">
+    <div className="w-full px-4 py-8 md:px-8 md:py-10">
       <div className="mx-auto max-w-4xl space-y-6 md:space-y-8">
         {/* Header */}
         <div className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_22px_70px_-45px_rgba(15,23,42,0.75)] backdrop-blur-sm">

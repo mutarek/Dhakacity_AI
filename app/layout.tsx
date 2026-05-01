@@ -28,12 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="app-shell min-h-full flex flex-col">
-        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="floating-orb floating-orb-1" />
-          <div className="floating-orb floating-orb-2" />
-          <div className="floating-orb floating-orb-3" />
-        </div>
+      <body className="min-h-full flex flex-col bg-gray-50">
 
         {/* Sticky Header — JustDial-style */}
         <header className="sticky top-0 z-50 w-full shadow-md">
@@ -140,9 +135,9 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
 
         {/* Footer */}
-        <footer className="px-3 pb-4 pt-8 md:px-5 md:pb-6 md:pt-12">
-          <div className="container overflow-hidden rounded-[2rem] border border-white/45 bg-slate-950 text-white shadow-[0_30px_90px_-45px_rgba(15,23,42,0.88)]">
-            <div className="footer-mesh relative px-5 py-8 md:px-8 md:py-10">
+        <footer className="w-full bg-slate-950 text-white">
+          <div className="w-full">
+            <div className="relative px-5 py-10 md:px-8 md:py-12">
               <div className="grid gap-8 md:grid-cols-[1.5fr_1fr_1fr] md:items-start">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -188,7 +183,6 @@ export default function RootLayout({
                 <p>Sharper local search, better city navigation.</p>
               </div>
             </div>
-          </div>
         </footer>
       </body>
     </html>

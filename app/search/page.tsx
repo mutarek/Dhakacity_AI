@@ -106,8 +106,8 @@ function SearchPageContent() {
   };
 
   return (
-    <div className="container py-8 md:py-10">
-      <div className="space-y-6 md:space-y-8">
+    <div className="w-full px-4 py-8 md:px-8 md:py-10">
+      <div className="mx-auto max-w-7xl space-y-6 md:space-y-8">
         {/* Search Bar */}
         <div className="rounded-3xl border border-white/70 bg-white/75 p-5 shadow-[0_22px_65px_-40px_rgba(15,23,42,0.75)] backdrop-blur-sm md:p-7">
           <div className="space-y-3">
@@ -200,7 +200,7 @@ function SearchPageContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="container py-8">Loading search...</div>}>
+    <Suspense fallback={<div className="w-full px-4 py-8">Loading search...</div>}>
       <SearchPageContent />
     </Suspense>
   );
