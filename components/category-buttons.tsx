@@ -1,170 +1,121 @@
-"use client";
+import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+const sections = [
+  {
+    title: "Food & Dining",
+    color: "text-orange-700",
+    items: [
+      { label: "Restaurants",     icon: "🍽️", q: "restaurants" },
+      { label: "Biryani",         icon: "🍛", q: "biryani" },
+      { label: "Fast Food",       icon: "🍔", q: "fast food" },
+      { label: "Fine Dining",     icon: "🍷", q: "fine dining" },
+      { label: "Cafe & Coffee",   icon: "☕", q: "cafe" },
+      { label: "Bakery",          icon: "🥐", q: "bakery" },
+      { label: "Family Meals",    icon: "👨‍👩‍👧‍👦", q: "family restaurant" },
+      { label: "Street Food",     icon: "🌮", q: "street food" },
+      { label: "Chinese",         icon: "🥡", q: "chinese restaurant" },
+      { label: "Desserts",        icon: "🍰", q: "desserts" },
+      { label: "Juice Bar",       icon: "🥤", q: "juice bar" },
+      { label: "Budget Friendly", icon: "💸", q: "budget food" },
+    ],
+  },
+  {
+    title: "Health & Medical",
+    color: "text-sky-700",
+    items: [
+      { label: "Hospitals",       icon: "🏥", q: "hospitals" },
+      { label: "Diagnostics",     icon: "🔬", q: "diagnostic center" },
+      { label: "Pharmacy",        icon: "💊", q: "pharmacy" },
+      { label: "Emergency",       icon: "🚨", q: "emergency" },
+      { label: "Doctors",         icon: "👨‍⚕️", q: "doctors" },
+      { label: "Dentists",        icon: "🦷", q: "dentist" },
+      { label: "Eye Care",        icon: "👁️", q: "eye care" },
+      { label: "Cardiac Care",    icon: "❤️", q: "cardiac" },
+      { label: "Blood Tests",     icon: "🧪", q: "blood test" },
+      { label: "Physiotherapy",   icon: "🦴", q: "physiotherapy" },
+      { label: "Skin & Derma",    icon: "🧴", q: "dermatology" },
+      { label: "24/7 Care",       icon: "🕛", q: "24 hour" },
+    ],
+  },
+  {
+    title: "Beauty & Wellness",
+    color: "text-pink-700",
+    items: [
+      { label: "Beauty Parlour",  icon: "💅", q: "beauty parlour" },
+      { label: "Spa & Massage",   icon: "💆", q: "spa massage" },
+      { label: "Salons",          icon: "✂️", q: "salon" },
+      { label: "Gym & Fitness",   icon: "🏋️", q: "gym" },
+      { label: "Yoga Classes",    icon: "🧘", q: "yoga" },
+      { label: "Mental Health",   icon: "🧠", q: "mental health" },
+    ],
+  },
+  {
+    title: "Home & Living",
+    color: "text-teal-700",
+    items: [
+      { label: "Home Decor",      icon: "🛋️", q: "home decor" },
+      { label: "Electricians",    icon: "⚡", q: "electricians" },
+      { label: "Plumbers",        icon: "🔧", q: "plumbers" },
+      { label: "AC Repair",       icon: "❄️", q: "ac repair" },
+      { label: "Painters",        icon: "🖌️", q: "painters" },
+      { label: "Cleaning",        icon: "🧹", q: "cleaning service" },
+      { label: "Pest Control",    icon: "🦟", q: "pest control" },
+      { label: "Internet",        icon: "📡", q: "internet service" },
+    ],
+  },
+  {
+    title: "Education",
+    color: "text-violet-700",
+    items: [
+      { label: "Schools",         icon: "🏫", q: "schools" },
+      { label: "Coaching",        icon: "📚", q: "coaching center" },
+      { label: "Universities",    icon: "🎓", q: "university" },
+      { label: "English Course",  icon: "🗣️", q: "english course" },
+      { label: "Computer Course", icon: "💻", q: "computer training" },
+      { label: "Drawing Classes", icon: "🎨", q: "drawing classes" },
+    ],
+  },
+  {
+    title: "Services & More",
+    color: "text-amber-700",
+    items: [
+      { label: "Real Estate",     icon: "🏠", q: "real estate" },
+      { label: "Banks & ATM",     icon: "🏦", q: "bank" },
+      { label: "Courier",         icon: "📦", q: "courier service" },
+      { label: "Movers",          icon: "🚚", q: "packers movers" },
+      { label: "Event Planners",  icon: "🎉", q: "event organizer" },
+      { label: "Photographers",   icon: "📸", q: "photographer" },
+      { label: "Car Rental",      icon: "🚗", q: "car rental" },
+      { label: "Tailoring",       icon: "🧵", q: "tailoring" },
+      { label: "Grocery",         icon: "🛒", q: "grocery store" },
+      { label: "Pet Shop",        icon: "🐾", q: "pet shop" },
+      { label: "Car Repair",      icon: "🔩", q: "car repair" },
+      { label: "Bike Repair",     icon: "🏍️", q: "bike repair" },
+    ],
+  },
+];
 
 export function CategoryButtons() {
-  const router = useRouter();
-
-  const categories = [
-    {
-      label: "Restaurants",
-      description: "Popular dining picks",
-      type: "category",
-      value: "restaurant",
-      icon: "🍽️",
-      className:
-        "border-amber-200/80 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 text-amber-950 shadow-[0_18px_40px_-28px_rgba(217,119,6,0.75)] hover:border-amber-300 hover:bg-gradient-to-br hover:from-amber-100 hover:via-orange-50 hover:to-rose-100",
-      iconClassName: "bg-amber-100 text-amber-700",
-    },
-    {
-      label: "Hospitals",
-      description: "Trusted healthcare",
-      type: "category",
-      value: "hospital",
-      icon: "🏥",
-      className:
-        "border-sky-200/80 bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 text-sky-950 shadow-[0_18px_40px_-28px_rgba(14,116,144,0.75)] hover:border-sky-300 hover:bg-gradient-to-br hover:from-sky-100 hover:via-cyan-50 hover:to-blue-100",
-      iconClassName: "bg-sky-100 text-sky-700",
-    },
-    {
-      label: "Diagnostics",
-      description: "Scans and lab work",
-      type: "category",
-      value: "diagnostic",
-      icon: "🔬",
-      className:
-        "border-violet-200/80 bg-gradient-to-br from-violet-50 via-fuchsia-50 to-pink-50 text-violet-950 shadow-[0_18px_40px_-28px_rgba(109,40,217,0.7)] hover:border-violet-300 hover:bg-gradient-to-br hover:from-violet-100 hover:via-fuchsia-50 hover:to-pink-100",
-      iconClassName: "bg-violet-100 text-violet-700",
-    },
-    {
-      label: "Biryani Spots",
-      description: "Rich local favorites",
-      type: "query",
-      value: "biryani",
-      icon: "🍛",
-      className:
-        "border-orange-200/80 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 text-orange-950 shadow-[0_18px_40px_-28px_rgba(234,88,12,0.75)] hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-100 hover:via-amber-50 hover:to-yellow-100",
-      iconClassName: "bg-orange-100 text-orange-700",
-    },
-    {
-      label: "Emergency Care",
-      description: "Urgent medical help",
-      type: "query",
-      value: "emergency",
-      icon: "🚑",
-      className:
-        "border-rose-200/80 bg-gradient-to-br from-rose-50 via-red-50 to-orange-50 text-rose-950 shadow-[0_18px_40px_-28px_rgba(225,29,72,0.75)] hover:border-rose-300 hover:bg-gradient-to-br hover:from-rose-100 hover:via-red-50 hover:to-orange-100",
-      iconClassName: "bg-rose-100 text-rose-700",
-    },
-    {
-      label: "Blood Tests",
-      description: "Fast pathology access",
-      type: "query",
-      value: "blood test",
-      icon: "🧪",
-      className:
-        "border-fuchsia-200/80 bg-gradient-to-br from-fuchsia-50 via-pink-50 to-rose-50 text-fuchsia-950 shadow-[0_18px_40px_-28px_rgba(192,38,211,0.72)] hover:border-fuchsia-300 hover:bg-gradient-to-br hover:from-fuchsia-100 hover:via-pink-50 hover:to-rose-100",
-      iconClassName: "bg-fuchsia-100 text-fuchsia-700",
-    },
-    {
-      label: "Cardiac Care",
-      description: "Heart specialists nearby",
-      type: "query",
-      value: "cardiac",
-      icon: "❤️",
-      className:
-        "border-red-200/80 bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 text-red-950 shadow-[0_18px_40px_-28px_rgba(220,38,38,0.72)] hover:border-red-300 hover:bg-gradient-to-br hover:from-red-100 hover:via-rose-50 hover:to-pink-100",
-      iconClassName: "bg-red-100 text-red-700",
-    },
-    {
-      label: "Fine Dining",
-      description: "Premium experiences",
-      type: "query",
-      value: "fine dining",
-      icon: "🍷",
-      className:
-        "border-stone-200/80 bg-gradient-to-br from-stone-50 via-neutral-50 to-zinc-100 text-stone-950 shadow-[0_18px_40px_-28px_rgba(87,83,78,0.6)] hover:border-stone-300 hover:bg-gradient-to-br hover:from-stone-100 hover:via-neutral-50 hover:to-zinc-100",
-      iconClassName: "bg-stone-100 text-stone-700",
-    },
-    {
-      label: "Family Meals",
-      description: "Comfort food options",
-      type: "query",
-      value: "family restaurant",
-      icon: "👨‍👩‍👧‍👦",
-      className:
-        "border-emerald-200/80 bg-gradient-to-br from-emerald-50 via-lime-50 to-teal-50 text-emerald-950 shadow-[0_18px_40px_-28px_rgba(5,150,105,0.68)] hover:border-emerald-300 hover:bg-gradient-to-br hover:from-emerald-100 hover:via-lime-50 hover:to-teal-100",
-      iconClassName: "bg-emerald-100 text-emerald-700",
-    },
-    {
-      label: "24/7 Care",
-      description: "Always-open support",
-      type: "query",
-      value: "24/7",
-      icon: "🕛",
-      className:
-        "border-indigo-200/80 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 text-indigo-950 shadow-[0_18px_40px_-28px_rgba(79,70,229,0.68)] hover:border-indigo-300 hover:bg-gradient-to-br hover:from-indigo-100 hover:via-blue-50 hover:to-cyan-100",
-      iconClassName: "bg-indigo-100 text-indigo-700",
-    },
-    {
-      label: "Nearby",
-      description: "Quick local results",
-      type: "near",
-      value: "near",
-      icon: "📍",
-      className:
-        "border-teal-200/80 bg-gradient-to-br from-teal-50 via-cyan-50 to-emerald-50 text-teal-950 shadow-[0_18px_40px_-28px_rgba(13,148,136,0.72)] hover:border-teal-300 hover:bg-gradient-to-br hover:from-teal-100 hover:via-cyan-50 hover:to-emerald-100",
-      iconClassName: "bg-teal-100 text-teal-700",
-    },
-    {
-      label: "Budget Friendly",
-      description: "Good picks under control",
-      type: "query",
-      value: "budget",
-      icon: "💸",
-      className:
-        "border-lime-200/80 bg-gradient-to-br from-lime-50 via-green-50 to-emerald-50 text-lime-950 shadow-[0_18px_40px_-28px_rgba(101,163,13,0.68)] hover:border-lime-300 hover:bg-gradient-to-br hover:from-lime-100 hover:via-green-50 hover:to-emerald-100",
-      iconClassName: "bg-lime-100 text-lime-700",
-    },
-  ];
-
-  const handleCategoryClick = (category: (typeof categories)[number]) => {
-    if (category.type === "near") {
-      router.push("/search?near=true");
-      return;
-    }
-
-    if (category.type === "query") {
-      router.push(`/search?q=${encodeURIComponent(category.value)}`);
-      return;
-    }
-
-    router.push(`/search?category=${category.value}`);
-  };
-
   return (
-    <div className="grid w-full max-w-6xl grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4 md:gap-4">
-      {categories.map((category) => (
-        <Button
-          key={category.value}
-          onClick={() => handleCategoryClick(category)}
-          variant="outline"
-          size="lg"
-          className={`group h-32 rounded-[1.75rem] px-4 py-4 text-left shadow-[0_12px_30px_-24px_rgba(15,23,42,0.45)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 md:h-36 md:text-lg flex flex-col items-start justify-between ${category.className}`}
-        >
-          <span
-            className={`flex size-12 items-center justify-center rounded-2xl text-2xl shadow-sm transition-transform duration-300 group-hover:scale-110 md:size-14 md:text-3xl ${category.iconClassName}`}
-          >
-            {category.icon}
-          </span>
-          <span className="space-y-1">
-            <span className="block tracking-tight">{category.label}</span>
-            <span className="block text-xs font-medium text-current/70 md:text-sm">
-              {category.description}
-            </span>
-          </span>
-        </Button>
+    <div className="w-full space-y-8">
+      {sections.map((section) => (
+        <div key={section.title}>
+          <h3 className={`mb-3 text-sm font-bold uppercase tracking-widest ${section.color}`}>
+            {section.title}
+          </h3>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12">
+            {section.items.map(({ label, icon, q }) => (
+              <Link
+                key={label}
+                href={`/search?q=${encodeURIComponent(q)}`}
+                className="flex flex-col items-center gap-1.5 rounded-xl border border-gray-100 bg-white px-2 py-3 text-center shadow-sm transition hover:border-teal-300 hover:shadow-md hover:-translate-y-0.5"
+              >
+                <span className="text-2xl leading-none">{icon}</span>
+                <span className="line-clamp-2 text-[11px] font-semibold leading-tight text-gray-700">{label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );
