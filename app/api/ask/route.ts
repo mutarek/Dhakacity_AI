@@ -5,6 +5,7 @@ import { toPlaceDto } from "@/lib/place-utils";
 import { vectorSearchPlaceIds } from "@/lib/embeddings";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const CHAT_MODEL = process.env.OPENAI_CHAT_MODEL ?? "gpt-4o-mini";
 

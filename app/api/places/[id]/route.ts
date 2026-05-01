@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { toPlaceDto } from "@/lib/place-utils";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function GET(
   _request: NextRequest,

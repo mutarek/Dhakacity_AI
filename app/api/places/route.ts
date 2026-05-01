@@ -14,6 +14,7 @@ import { distanceKm } from "@/lib/geo";
 import { upsertPlaceEmbedding } from "@/lib/embeddings";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type ListResponse = {
   places: ReturnType<typeof toPlaceDto>[];
