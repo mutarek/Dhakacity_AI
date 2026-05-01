@@ -6,6 +6,14 @@ import { CategoryButtons } from "@/components/category-buttons";
 import { PlaceCard } from "@/components/place-card";
 import { Place } from "@/types/place";
 
+const QUICK_QUERIES = [
+  "Best biryani nearby",
+  "Hospitals in Dhanmondi",
+  "Open 24h pharmacy",
+  "Coffee shop",
+  "Diagnostic center",
+];
+
 export default function Home() {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,78 +56,78 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full px-4 py-8 md:px-8 md:py-12">
-      <div className="mx-auto max-w-7xl flex flex-col items-center gap-8 md:gap-10">
-        {/* Hero Section */}
-        <div className="w-full max-w-5xl rounded-3xl border border-white/60 bg-white/70 p-6 shadow-[0_20px_70px_-35px_rgba(15,23,42,0.45)] backdrop-blur-sm md:p-10">
-          <div className="flex flex-col gap-6 text-center md:gap-8">
-            <div className="inline-flex items-center justify-center gap-2 self-center rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1 text-xs font-bold tracking-[0.14em] text-cyan-700 uppercase">
-              Local Discovery Assistant
-            </div>
-            <h1 className="text-balance text-4xl font-extrabold leading-tight tracking-tight text-transparent md:text-6xl bg-gradient-to-r from-cyan-700 via-emerald-700 to-amber-600 bg-clip-text">
-              Ask Dhaka AI. Find trusted places in seconds.
-            </h1>
-            <p className="mx-auto max-w-3xl text-base text-foreground/80 md:text-xl">
-              Restaurants, hospitals, diagnostics, and quick nearby options,
-              tailored for Dhanmondi with a clean mobile-first experience.
-            </p>
-            <div className="grid grid-cols-2 gap-3 text-left md:grid-cols-4">
-              <div className="rounded-2xl border border-cyan-100 bg-cyan-50/80 px-4 py-3">
-                <p className="text-xs font-semibold text-cyan-700">Places</p>
-                <p className="text-xl font-bold text-cyan-900">10+</p>
-              </div>
-              <div className="rounded-2xl border border-emerald-100 bg-emerald-50/80 px-4 py-3">
-                <p className="text-xs font-semibold text-emerald-700">Categories</p>
-                <p className="text-xl font-bold text-emerald-900">3</p>
-              </div>
-              <div className="rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-3">
-                <p className="text-xs font-semibold text-amber-700">Navigation</p>
-                <p className="text-xl font-bold text-amber-900">Fast</p>
-              </div>
-              <div className="rounded-2xl border border-violet-100 bg-violet-50/80 px-4 py-3">
-                <p className="text-xs font-semibold text-violet-700">Designed</p>
-                <p className="text-xl font-bold text-violet-900">Mobile First</p>
-              </div>
-            </div>
+    <>
+      {/* ── Hero ── */}
+      <section className="w-full bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 py-14 md:py-20">
+        <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 px-4 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-semibold text-white">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-300" />
+            AI-Powered Local Discovery
+          </span>
+          <h1 className="text-balance text-4xl font-black leading-tight text-white md:text-5xl">
+            Find trusted places<br className="hidden sm:block" /> in Dhaka — instantly
+          </h1>
+          <p className="max-w-md text-base text-teal-100 md:text-lg">
+            Restaurants, hospitals, pharmacies and more. Ask in plain English.
+          </p>
+          <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
+          <div className="flex flex-wrap justify-center gap-2">
+            {QUICK_QUERIES.map((q) => (
+              <button
+                key={q}
+                onClick={() => handleChatSubmit(q)}
+                disabled={isLoading}
+                className="rounded-full border border-white/25 bg-white/15 px-3.5 py-1.5 text-xs font-medium text-white/90 transition-colors hover:bg-white/25 disabled:opacity-60"
+              >
+                {q}
+              </button>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Chat Box */}
-        <ChatBox onSubmit={handleChatSubmit} isLoading={isLoading} />
-
-        {/* AI Results */}
-        {showResults && (
-          <div className="w-full max-w-4xl space-y-4 animate-in fade-in slide-in-from-bottom-4">
-            <h2 className="text-xl font-semibold">
-              {answer ?? "Here are some recommendations:"}
-            </h2>
-
-            {error ? (
-              <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                {error}
+      {/* ── Content ── */}
+      <section className="w-full bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
+          {showResults ? (
+            <div className="space-y-5 animate-in fade-in slide-in-from-bottom-2">
+              <button
+                onClick={() => setShowResults(false)}
+                className="flex items-center gap-1 text-sm font-medium text-teal-600 hover:underline"
+              >
+                ← Browse categories
+              </button>
+              {answer && (
+                <div className="rounded-lg border border-gray-200 bg-white px-5 py-4 shadow-sm">
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-400">AI Response</p>
+                  <p className="text-gray-800">{answer}</p>
+                </div>
+              )}
+              {error && (
+                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {error}
+                </div>
+              )}
+              {results.length === 0 && !error && (
+                <p className="text-sm text-gray-500">No matching places found.</p>
+              )}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {results.map((place) => (
+                  <PlaceCard key={place.id} place={place} />
+                ))}
               </div>
-            ) : null}
-
-            {results.length === 0 ? (
-              <p className="text-muted-foreground">No matching places found yet.</p>
-            ) : null}
-
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {results.map((place) => (
-                <PlaceCard key={place.id} place={place} />
-              ))}
             </div>
-          </div>
-        )}
-
-        {/* Category Buttons */}
-        {!showResults && (
-          <div className="w-full flex flex-col items-center gap-4">
-            <p className="text-sm text-muted-foreground">Or browse by category</p>
-            <CategoryButtons />
-          </div>
-        )}
-      </div>
-    </div>
+          ) : (
+            <div className="space-y-5">
+              <div>
+                <h2 className="text-xl font-bold text-gray-800">Browse by category</h2>
+                <p className="mt-1 text-sm text-gray-500">Tap a category to explore places in Dhaka</p>
+              </div>
+              <CategoryButtons />
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

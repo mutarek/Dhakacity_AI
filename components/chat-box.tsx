@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 
 interface ChatBoxProps {
   onSubmit?: (message: string) => Promise<void> | void;
@@ -22,25 +19,27 @@ export function ChatBox({ onSubmit, isLoading = false }: ChatBoxProps) {
   };
 
   return (
-    <Card className="w-full max-w-3xl rounded-3xl border border-white/70 bg-white/80 p-4 shadow-[0_30px_90px_-45px_rgba(15,23,42,0.7)] backdrop-blur-sm md:p-6">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
-        <Input
+    <form onSubmit={handleSubmit} className="flex w-full max-w-2xl overflow-hidden rounded-xl shadow-xl">
+      <div className="flex flex-1 items-center gap-3 bg-white px-4 min-w-0">
+        <svg className="h-5 w-5 shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+        </svg>
+        <input
           type="text"
-          placeholder="Ask about restaurants, hospitals, or diagnostics..."
+          placeholder="Ask anything… biryani, hospitals, pharmacy…"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           disabled={isLoading}
-          className="h-12 flex-1 text-base"
+          className="w-full py-4 text-base text-gray-800 placeholder-gray-400 outline-none bg-transparent"
         />
-        <Button
-          type="submit"
-          size="lg"
-          disabled={isLoading}
-          className="h-12 rounded-2xl bg-gradient-to-r from-cyan-600 to-emerald-600 px-8 text-white hover:from-cyan-500 hover:to-emerald-500"
-        >
-          {isLoading ? "Thinking..." : "Ask"}
-        </Button>
-      </form>
-    </Card>
+      </div>
+      <button
+        type="submit"
+        disabled={isLoading || !message.trim()}
+        className="shrink-0 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 disabled:bg-gray-300 px-6 py-4 text-sm font-bold text-white transition-colors"
+      >
+        {isLoading ? "…" : "Ask AI"}
+      </button>
+    </form>
   );
 }
