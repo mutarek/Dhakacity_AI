@@ -147,9 +147,9 @@ export default function RootLayout({
               </div>
             </div>
 
-            <div className="mt-8 border-t border-gray-800 pt-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between text-xs text-gray-600">
-              <p>© 2026 DhakaCity AI. Made for Dhanmondi residents.</p>
-              <p>Sharper local search · Better city navigation.</p>
+            <div className="mt-8 border-t border-gray-800 pt-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between text-xs text-gray-500">
+              <p>© 2026 <span className="text-teal-500 font-semibold">DhakaCity AI</span> — All rights reserved.</p>
+              <p>Built with ❤️ for Dhaka · Powered by AI</p>
             </div>
           </div>
         </footer>
